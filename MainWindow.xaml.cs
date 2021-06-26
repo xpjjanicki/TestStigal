@@ -8,12 +8,8 @@ using Stigal.AppCode;
 
 namespace Stigal
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        public AppShape r = new AppShape();
         public List<AppPoint> lstPoints = new List<AppPoint>();
 
         public MainWindow()
@@ -28,14 +24,12 @@ namespace Stigal
             return f;
         }
 
-        //public void ShowSaveFileDialog(AppRectangle r)
         public void ShowSaveFileDialog(List<AppPoint> lst)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             if (saveFileDialog.ShowDialog() == true)
             {
                 FileGenerator fg = new FileGenerator();
-                //string fileContent = fg.GenerateFile(r);
                 string fileContent = fg.GenerateFile(lst);
 
                 fg.SaveFile(saveFileDialog.FileName, fileContent);
