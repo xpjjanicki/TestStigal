@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using Stigal.AppCode;
@@ -11,6 +13,9 @@ namespace Stigal
     /// </summary>
     public partial class MainWindow : Window
     {
+        public AppShape r = new AppShape();
+        public List<AppPoint> lstPoints = new List<AppPoint>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -23,13 +28,15 @@ namespace Stigal
             return f;
         }
 
-        public void ShowSaveFileDialog(AppRectangle r)
+        //public void ShowSaveFileDialog(AppRectangle r)
+        public void ShowSaveFileDialog(List<AppPoint> lst)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             if (saveFileDialog.ShowDialog() == true)
             {
                 FileGenerator fg = new FileGenerator();
-                string fileContent = fg.GenerateFile(r);
+                //string fileContent = fg.GenerateFile(r);
+                string fileContent = fg.GenerateFile(lst);
 
                 fg.SaveFile(saveFileDialog.FileName, fileContent);
             }
@@ -60,10 +67,9 @@ namespace Stigal
                 };
 
                 Move m = new Move();
-                AppRectangle r = new AppRectangle();
-                r = m.GenerateRectangle(fWidth, fHeight, startPoint);
+                lstPoints = m.GenerateShape(fWidth, fHeight, startPoint);
 
-                ShowSaveFileDialog(r);
+                ShowSaveFileDialog(lstPoints);
 
 
                 MessageBox.Show("Poprawnie wygenerowano plik");
@@ -72,8 +78,28 @@ namespace Stigal
             {
                 MessageBox.Show("Wystąpił błąd:\n" + ex.ToString());
             }
+        }
 
-            
+        private void BtnDraw_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstPoints.Count > 0)
+            {
+                PointCollection collection = new PointCollection();
+                foreach (var point in lstPoints)
+                {
+                    collection.Add(new Point(point.X, point.Y));
+                }
+                collection.Add(new Point(lstPoints[0].X, lstPoints[0].Y));
+
+                Polyline line = new Polyline()
+                {
+                    Points = collection,
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1
+                };
+
+                img.Children.Add(line);
+            }
         }
     }
 }

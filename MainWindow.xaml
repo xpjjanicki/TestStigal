@@ -18,6 +18,7 @@
         <TextBox x:Name="txtX" HorizontalAlignment="Left" Height="23" Margin="131,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="3"/>
         <TextBox x:Name="txtY" HorizontalAlignment="Left" Height="23" Margin="131,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="4"/>
         <Button x:Name="btnGenerateFile" Content="Generuj plik" HorizontalAlignment="Left" Margin="94,267,0,0" VerticalAlignment="Top" Width="75" TabIndex="5" Click="BtnGenerateFile_Click"/>
-        
+        <Canvas x:Name="img" HorizontalAlignment="Left" Height="399" Margin="256,10,0,0" VerticalAlignment="Top" Width="526" Background="#FFD3FFF3"/>
+        <Button x:Name="btnDraw" Content="Rysuj" HorizontalAlignment="Left" Margin="176,267,0,0" VerticalAlignment="Top" Width="75" TabIndex="6" Click="BtnDraw_Click"/>
     </Grid>
 </Window>

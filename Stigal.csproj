@@ -58,7 +58,7 @@
     <Compile Include="AppCode\FileGenerator.cs" />
     <Compile Include="AppCode\Move.cs" />
     <Compile Include="AppCode\AppPoint.cs" />
-    <Compile Include="AppCode\AppRectangle.cs" />
+    <Compile Include="AppCode\AppShape.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
