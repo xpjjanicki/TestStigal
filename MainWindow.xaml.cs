@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
+using Stigal.AppCode;
 
 namespace Stigal
 {
@@ -30,6 +21,18 @@ namespace Stigal
             float f = 0f;
             float.TryParse(s, out f);
             return f;
+        }
+
+        public void ShowSaveFileDialog(AppRectangle r)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                FileGenerator fg = new FileGenerator();
+                string fileContent = fg.GenerateFile(r);
+
+                fg.SaveFile(saveFileDialog.FileName, fileContent);
+            }
         }
 
         private void BtnGenerateFile_Click(object sender, RoutedEventArgs e)
@@ -51,6 +54,16 @@ namespace Stigal
                 float fX = StringToFloat(sX);
                 float fY = StringToFloat(sY);
 
+                AppPoint startPoint = new AppPoint() {
+                    X = fX,
+                    Y = fY
+                };
+
+                Move m = new Move();
+                AppRectangle r = new AppRectangle();
+                r = m.GenerateRectangle(fWidth, fHeight, startPoint);
+
+                ShowSaveFileDialog(r);
 
 
                 MessageBox.Show("Poprawnie wygenerowano plik");
