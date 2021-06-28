@@ -20,5 +20,6 @@
         <Button x:Name="btnGenerateFile" Content="Generuj plik" HorizontalAlignment="Left" Margin="94,267,0,0" VerticalAlignment="Top" Width="75" TabIndex="5" Click="BtnGenerateFile_Click"/>
         <Canvas x:Name="img" HorizontalAlignment="Left" Height="399" Margin="256,10,0,0" VerticalAlignment="Top" Width="526" Background="#FFD3FFF3"/>
         <Button x:Name="btnDraw" Content="Rysuj" HorizontalAlignment="Left" Margin="176,267,0,0" VerticalAlignment="Top" Width="75" TabIndex="6" Click="BtnDraw_Click"/>
+        <Button x:Name="btnClear" Content="Wyczyść formularz" HorizontalAlignment="Left" Margin="94,306,0,0" VerticalAlignment="Top" Width="157" TabIndex="7" Background="#FFFF8D8D" Click="BtnClear_Click"/>
     </Grid>
 </Window>

@@ -38,35 +38,46 @@ namespace Stigal
 
         private void BtnGenerateFile_Click(object sender, RoutedEventArgs e)
         {
-            string sWidth = string.Empty;
-            string sHeight = string.Empty;
-            string sX = string.Empty;
-            string sY = string.Empty;
-
             try
             {
-                sWidth = txtWidth.Text;
-                sHeight = txtHeight.Text;
-                sX = txtX.Text;
-                sY = txtY.Text;
+                if (txtWidth.Text.Trim().Length > 0 &&
+                    txtHeight.Text.Trim().Length > 0 &&
+                    txtX.Text.Trim().Length > 0 &&
+                    txtY.Text.Trim().Length > 0)
+                {
+                    string sWidth = string.Empty;
+                    string sHeight = string.Empty;
+                    string sX = string.Empty;
+                    string sY = string.Empty;
 
-                float fWidth = StringToFloat(sWidth);
-                float fHeight = StringToFloat(sHeight);
-                float fX = StringToFloat(sX);
-                float fY = StringToFloat(sY);
+                    sWidth = txtWidth.Text;
+                    sHeight = txtHeight.Text;
+                    sX = txtX.Text;
+                    sY = txtY.Text;
 
-                AppPoint startPoint = new AppPoint() {
-                    X = fX,
-                    Y = fY
-                };
+                    float fWidth = StringToFloat(sWidth);
+                    float fHeight = StringToFloat(sHeight);
+                    float fX = StringToFloat(sX);
+                    float fY = StringToFloat(sY);
 
-                Move m = new Move();
-                lstPoints = m.GenerateShape(fWidth, fHeight, startPoint);
+                    AppPoint startPoint = new AppPoint()
+                    {
+                        X = fX,
+                        Y = fY
+                    };
 
-                ShowSaveFileDialog(lstPoints);
+                    Move m = new Move();
+                    lstPoints = m.GenerateShape(fWidth, fHeight, startPoint);
+
+                    ShowSaveFileDialog(lstPoints);
 
 
-                MessageBox.Show("Poprawnie wygenerowano plik");
+                    MessageBox.Show("Poprawnie wygenerowano plik");
+                }
+                else
+                {
+                    MessageBox.Show("Wypełnij formularz");
+                }
             }
             catch (Exception ex)
             {
@@ -78,6 +89,8 @@ namespace Stigal
         {
             if (lstPoints.Count > 0)
             {
+                img.Children.Clear();
+
                 PointCollection collection = new PointCollection();
                 foreach (var point in lstPoints)
                 {
@@ -94,6 +107,20 @@ namespace Stigal
 
                 img.Children.Add(line);
             }
+            else
+            {
+                MessageBox.Show("Najpierw wygeneruj plik.");
+            }
+        }
+
+        private void BtnClear_Click(object sender, RoutedEventArgs e)
+        {
+            img.Children.Clear();
+            txtWidth.Clear();
+            txtHeight.Clear();
+            txtX.Clear();
+            txtY.Clear();
+            lstPoints.Clear();
         }
     }
 }
